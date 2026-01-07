@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Özür</title>
+<title>Özür Dilerim ❤️</title>
+
 <style>
 body{
     margin:0;
@@ -11,48 +12,86 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
-    font-family:Arial;
-    background:#ffe6ec;
+    font-family:'Arial', sans-serif;
+    background:linear-gradient(135deg,#ffb6c1,#ffe6f0);
+    overflow:hidden;
     text-align:center;
 }
+
 button{
     padding:15px 30px;
     font-size:18px;
     border:none;
-    border-radius:12px;
+    border-radius:14px;
     cursor:pointer;
-    background:#ff5c8a;
+    background:#ff4f81;
     color:white;
-    transition:0.3s;
+    transition:0.3s ease;
 }
+
+button:hover{
+    transform:scale(1.1);
+}
+
 #hayir{
     position:absolute;
 }
+
+.fade{
+    animation:fadeIn 1.2s ease;
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform:scale(0.8);}
+    to{opacity:1; transform:scale(1);}
+}
+
+/* Kalpler */
+.heart{
+    position:fixed;
+    top:-10px;
+    font-size:24px;
+    animation:fall 5s linear infinite;
+}
+
+@keyframes fall{
+    to{
+        transform:translateY(110vh);
+        opacity:0;
+    }
+}
 </style>
 </head>
+
 <body>
 
-<div id="page1">
-    <h2>Gerçekten çok özür dilerim.<br>
-    Beni affet bilerek olmadı gerçekten. 🥺</h2><br>
+<audio id="music" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<div id="page1" class="fade">
+    <h2>Gerçekten çok özür dilerim 🥺<br>
+    Beni affet bilerek olmadı gerçekten…</h2><br>
     <button onclick="goPage2()">Devam Et</button>
 </div>
 
-<div id="page2" style="display:none">
-    <h2>Affettin mi?</h2><br>
+<div id="page2" style="display:none" class="fade">
+    <h2>Affettin mi? 💕</h2><br>
     <button id="evet" onclick="goLove()">Evet</button>
     <button id="hayir" onmouseover="kac()">Hayır</button>
 </div>
 
-<div id="page3" style="display:none">
-    <h1>SENİ ÇOK SEVİYOOOMMM<br>
+<div id="page3" style="display:none" class="fade">
+    <h1>💖 SENİ ÇOK SEVİYOOOMMM 💖<br>
     BİDAANEEEMM ❤️❤️❤️❤️❤️</h1>
 </div>
 
 <script>
 let size = 18;
+const music = document.getElementById("music");
 
 function goPage2(){
+    music.play();
     page1.style.display="none";
     page2.style.display="block";
 }
@@ -74,6 +113,19 @@ function kac(){
 function goLove(){
     page2.style.display="none";
     page3.style.display="block";
+    startHearts();
+}
+
+function startHearts(){
+    setInterval(()=>{
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random()*100 + "vw";
+        heart.style.animationDuration = (3+Math.random()*3)+"s";
+        document.body.appendChild(heart);
+        setTimeout(()=>heart.remove(),6000);
+    },300);
 }
 </script>
 
