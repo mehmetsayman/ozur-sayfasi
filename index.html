@@ -71,13 +71,14 @@ button:hover{ transform:scale(1.12); }
 
 <body>
 
-<!-- 🎵 GERÇEKTEN ROMANTİK MÜZİK (DEĞİŞTİ) -->
 <audio id="music" loop>
-  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_7c5c8b4c9b.mp3" type="audio/mpeg">
+  <source src="https://cdn.pixabay.com/download/audio/2022/10/25/audio_24921ff833.mp3?filename=sad-piano-126262.mp3" type="audio/mpeg">
 </audio>
 
 <div id="page1" class="fade">
     <h2>Gerçekten çok özür dilerim 🥺<br>
+    <span style="font-size:14px; color:#555;">(Müziği başlatmak için tıkla)</span></h2>
+    <br>
     <button id="btnDevam">Devam Et 💗</button>
 </div>
 
@@ -102,9 +103,10 @@ const music = document.getElementById("music");
 
 let size = 18;
 
+// Butona tıklanınca müzik başlar
 document.getElementById("btnDevam").onclick = () => {
-    music.volume = 0.7;
-    music.play();
+    music.volume = 0.5; // Ses seviyesi %50
+    music.play().catch(error => console.log("Müzik çalma hatası:", error));
     page1.style.display="none";
     page2.style.display="block";
 };
@@ -152,4 +154,3 @@ function heartExplosion(){
 
 </body>
 </html>
-
