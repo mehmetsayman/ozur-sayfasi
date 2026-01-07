@@ -12,8 +12,8 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
-    font-family:'Arial', sans-serif;
-    background:linear-gradient(135deg,#ffb6c1,#ffe6f0);
+    font-family:Arial, sans-serif;
+    background:linear-gradient(135deg,#ff9a9e,#fad0c4);
     overflow:hidden;
     text-align:center;
 }
@@ -38,20 +38,19 @@ button:hover{
 }
 
 .fade{
-    animation:fadeIn 1.2s ease;
+    animation:fadeIn 1s ease;
 }
 
 @keyframes fadeIn{
-    from{opacity:0; transform:scale(0.8);}
+    from{opacity:0; transform:scale(0.9);}
     to{opacity:1; transform:scale(1);}
 }
 
-/* Kalpler */
 .heart{
     position:fixed;
     top:-10px;
-    font-size:24px;
-    animation:fall 5s linear infinite;
+    font-size:26px;
+    animation:fall linear forwards;
 }
 
 @keyframes fall{
@@ -65,56 +64,63 @@ button:hover{
 
 <body>
 
+<!-- 🎵 Romantik müzik -->
 <audio id="music" loop>
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  <source src="https://cdn.pixabay.com/audio/2023/03/13/audio_ebc2fa8e86.mp3" type="audio/mpeg">
 </audio>
 
 <div id="page1" class="fade">
     <h2>Gerçekten çok özür dilerim 🥺<br>
     Beni affet bilerek olmadı gerçekten…</h2><br>
-    <button onclick="goPage2()">Devam Et</button>
+    <button id="btnDevam">Devam Et</button>
 </div>
 
-<div id="page2" style="display:none" class="fade">
+<div id="page2" class="fade" style="display:none">
     <h2>Affettin mi? 💕</h2><br>
-    <button id="evet" onclick="goLove()">Evet</button>
-    <button id="hayir" onmouseover="kac()">Hayır</button>
+    <button id="evet">Evet</button>
+    <button id="hayir">Hayır</button>
 </div>
 
-<div id="page3" style="display:none" class="fade">
+<div id="page3" class="fade" style="display:none">
     <h1>💖 SENİ ÇOK SEVİYOOOMMM 💖<br>
     BİDAANEEEMM ❤️❤️❤️❤️❤️</h1>
 </div>
 
 <script>
-let size = 18;
+const page1 = document.getElementById("page1");
+const page2 = document.getElementById("page2");
+const page3 = document.getElementById("page3");
+const evet  = document.getElementById("evet");
+const hayir = document.getElementById("hayir");
 const music = document.getElementById("music");
 
-function goPage2(){
+let size = 18;
+
+document.getElementById("btnDevam").onclick = () => {
     music.play();
-    page1.style.display="none";
-    page2.style.display="block";
-}
+    page1.style.display = "none";
+    page2.style.display = "block";
+};
 
-function kac(){
-    let x = Math.random() * (window.innerWidth - 120);
-    let y = Math.random() * (window.innerHeight - 120);
+hayir.onmouseover = () => {
+    const x = Math.random() * (window.innerWidth - 120);
+    const y = Math.random() * (window.innerHeight - 120);
     hayir.style.left = x + "px";
-    hayir.style.top = y + "px";
+    hayir.style.top  = y + "px";
 
-    size += 6;
+    size += 8;
     evet.style.fontSize = size + "px";
 
-    if(size > 60){
-        hayir.style.display="none";
+    if(size > 64){
+        hayir.style.display = "none";
     }
-}
+};
 
-function goLove(){
-    page2.style.display="none";
-    page3.style.display="block";
+evet.onclick = () => {
+    page2.style.display = "none";
+    page3.style.display = "block";
     startHearts();
-}
+};
 
 function startHearts(){
     setInterval(()=>{
@@ -122,10 +128,10 @@ function startHearts(){
         heart.className = "heart";
         heart.innerHTML = "❤️";
         heart.style.left = Math.random()*100 + "vw";
-        heart.style.animationDuration = (3+Math.random()*3)+"s";
+        heart.style.animationDuration = (3 + Math.random()*3) + "s";
         document.body.appendChild(heart);
         setTimeout(()=>heart.remove(),6000);
-    },300);
+    },250);
 }
 </script>
 
