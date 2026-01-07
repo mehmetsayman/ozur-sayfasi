@@ -12,67 +12,74 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
-    font-family:Arial, sans-serif;
-    background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+    font-family:'Arial', sans-serif;
+    background:radial-gradient(circle at top,#ffd1dc,#ff9aa2);
     overflow:hidden;
     text-align:center;
 }
 
 button{
-    padding:15px 30px;
+    padding:16px 34px;
     font-size:18px;
     border:none;
-    border-radius:14px;
+    border-radius:16px;
     cursor:pointer;
-    background:#ff4f81;
+    background:#ff3f6c;
     color:white;
     transition:0.3s ease;
 }
 
-button:hover{
-    transform:scale(1.1);
-}
+button:hover{ transform:scale(1.12); }
 
 #hayir{
     position:absolute;
 }
 
 .fade{
-    animation:fadeIn 1s ease;
+    animation:fadeIn 1.2s ease;
 }
 
 @keyframes fadeIn{
-    from{opacity:0; transform:scale(0.9);}
+    from{opacity:0; transform:scale(0.85);}
     to{opacity:1; transform:scale(1);}
 }
 
+/* Kalpler */
 .heart{
     position:fixed;
-    top:-10px;
     font-size:26px;
-    animation:fall linear forwards;
+    animation:fly 3.5s ease-out forwards;
 }
 
-@keyframes fall{
-    to{
-        transform:translateY(110vh);
-        opacity:0;
-    }
+@keyframes fly{
+    from{transform:translateY(0) scale(0.5); opacity:1;}
+    to{transform:translateY(-120vh) scale(1.4); opacity:0;}
+}
+
+/* Nabız efekti */
+.pulse{
+    animation:pulse 1.3s infinite;
+}
+
+@keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.06);}
+    100%{transform:scale(1);}
 }
 </style>
 </head>
 
 <body>
 
-<!-- 🎵 Romantik müzik -->
+<!-- 🎵 GERÇEKTEN ROMANTİK MÜZİK (DEĞİŞTİ) -->
 <audio id="music" loop>
-  <source src="https://cdn.pixabay.com/audio/2023/03/13/audio_ebc2fa8e86.mp3" type="audio/mpeg">
+  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_7c5c8b4c9b.mp3" type="audio/mpeg">
 </audio>
 
 <div id="page1" class="fade">
     <h2>Gerçekten çok özür dilerim 🥺<br>
-    Beni affet bilerek olmadı gerçekten…</h2><br>
-    <button id="btnDevam">Devam Et</button>
+    Kalbini kırmak istemezdim…</h2><br>
+    <button id="btnDevam">Devam Et 💗</button>
 </div>
 
 <div id="page2" class="fade" style="display:none">
@@ -81,7 +88,7 @@ button:hover{
     <button id="hayir">Hayır</button>
 </div>
 
-<div id="page3" class="fade" style="display:none">
+<div id="page3" class="fade pulse" style="display:none">
     <h1>💖 SENİ ÇOK SEVİYOOOMMM 💖<br>
     BİDAANEEEMM ❤️❤️❤️❤️❤️</h1>
 </div>
@@ -97,41 +104,50 @@ const music = document.getElementById("music");
 let size = 18;
 
 document.getElementById("btnDevam").onclick = () => {
+    music.volume = 0.7;
     music.play();
-    page1.style.display = "none";
-    page2.style.display = "block";
+    page1.style.display="none";
+    page2.style.display="block";
 };
 
-hayir.onmouseover = () => {
-    const x = Math.random() * (window.innerWidth - 120);
-    const y = Math.random() * (window.innerHeight - 120);
+function kac(){
+    const x = Math.random() * (window.innerWidth - 140);
+    const y = Math.random() * (window.innerHeight - 140);
     hayir.style.left = x + "px";
     hayir.style.top  = y + "px";
 
-    size += 8;
+    size += 10;
     evet.style.fontSize = size + "px";
 
-    if(size > 64){
-        hayir.style.display = "none";
+    if(navigator.vibrate) navigator.vibrate(40);
+
+    if(size > 70){
+        hayir.style.display="none";
+        evet.style.padding="40px 80px";
     }
-};
+}
+
+hayir.onmouseover = kac;
+hayir.onclick = kac;
 
 evet.onclick = () => {
-    page2.style.display = "none";
-    page3.style.display = "block";
-    startHearts();
+    page2.style.display="none";
+    page3.style.display="block";
+    heartExplosion();
 };
 
-function startHearts(){
+function heartExplosion(){
     setInterval(()=>{
-        const heart = document.createElement("div");
-        heart.className = "heart";
-        heart.innerHTML = "❤️";
-        heart.style.left = Math.random()*100 + "vw";
-        heart.style.animationDuration = (3 + Math.random()*3) + "s";
-        document.body.appendChild(heart);
-        setTimeout(()=>heart.remove(),6000);
-    },250);
+        for(let i=0;i<5;i++){
+            const heart=document.createElement("div");
+            heart.className="heart";
+            heart.innerHTML="❤️";
+            heart.style.left=(50+Math.random()*10-5)+"vw";
+            heart.style.bottom="20px";
+            document.body.appendChild(heart);
+            setTimeout(()=>heart.remove(),4000);
+        }
+    },400);
 }
 </script>
 
