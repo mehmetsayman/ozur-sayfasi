@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Özür</title>
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:Arial;
+    background:#ffe6ec;
+    text-align:center;
+}
+button{
+    padding:15px 30px;
+    font-size:18px;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    background:#ff5c8a;
+    color:white;
+    transition:0.3s;
+}
+#hayir{
+    position:absolute;
+}
+</style>
+</head>
+<body>
+
+<div id="page1">
+    <h2>Gerçekten çok özür dilerim.<br>
+    Beni affet bilerek olmadı gerçekten. 🥺</h2><br>
+    <button onclick="goPage2()">Devam Et</button>
+</div>
+
+<div id="page2" style="display:none">
+    <h2>Affettin mi?</h2><br>
+    <button id="evet" onclick="goLove()">Evet</button>
+    <button id="hayir" onmouseover="kac()">Hayır</button>
+</div>
+
+<div id="page3" style="display:none">
+    <h1>SENİ ÇOK SEVİYOOOMMM<br>
+    BİDAANEEEMM ❤️❤️❤️❤️❤️</h1>
+</div>
+
+<script>
+let size = 18;
+
+function goPage2(){
+    page1.style.display="none";
+    page2.style.display="block";
+}
+
+function kac(){
+    let x = Math.random() * (window.innerWidth - 120);
+    let y = Math.random() * (window.innerHeight - 120);
+    hayir.style.left = x + "px";
+    hayir.style.top = y + "px";
+
+    size += 6;
+    evet.style.fontSize = size + "px";
+
+    if(size > 60){
+        hayir.style.display="none";
+    }
+}
+
+function goLove(){
+    page2.style.display="none";
+    page3.style.display="block";
+}
+</script>
+
+</body>
+</html>
